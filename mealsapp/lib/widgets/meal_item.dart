@@ -9,6 +9,7 @@ class MealItem extends StatelessWidget {
   final int duration;
   final Complexity complexity;
   final Affordability affordability;
+  final Function deleteitem;
 
   MealItem(
       {required this.title,
@@ -16,10 +17,17 @@ class MealItem extends StatelessWidget {
       required this.affordability,
       required this.complexity,
       required this.imageURL,
-      required this.id});
+      required this.id,
+      required this.deleteitem});
   // const MealItem({ Key? key }) : super(key: key);
   void selectMeal(BuildContext ctx) {
-    Navigator.of(ctx).pushNamed(MealDetailScreen.routeName, arguments: id);
+    Navigator.of(ctx).pushNamed(MealDetailScreen.routeName, arguments: id).then(
+          (value){ if(value!=null)
+          {
+            deleteitem();
+          };},
+          
+        );
   }
 
   String get complexitytext {
@@ -38,7 +46,7 @@ class MealItem extends StatelessWidget {
     }
   }
 
-  String get afforadabilitytext{
+  String get afforadabilitytext {
     switch (affordability) {
       case Affordability.Affordable:
         return 'Affordable';
@@ -52,13 +60,14 @@ class MealItem extends StatelessWidget {
       default:
         return 'unknown';
     }
-
   }
 
   @override
   Widget build(BuildContext context) {
     return InkWell(
-      onTap: (){ selectMeal(context);},
+      onTap: () {
+        selectMeal(context);
+      },
       child: Card(
         shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(15)),
         elevation: 4,
@@ -111,7 +120,7 @@ class MealItem extends StatelessWidget {
                       ),
                       Text("$duration min")
                     ],
-                  ), 
+                  ),
                   Row(
                     children: [
                       Icon(Icons.work),
