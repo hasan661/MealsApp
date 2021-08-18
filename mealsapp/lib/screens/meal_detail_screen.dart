@@ -1,10 +1,13 @@
 import 'package:flutter/material.dart';
+import 'package:mealsapp/models/meal.dart';
 
 import '/dummy_data.dart';
 
 class MealDetailScreen extends StatelessWidget {
   static const routeName = "/meal-detail";
-  const MealDetailScreen({Key? key}) : super(key: key);
+  dynamic toggle;
+  dynamic isfavorite;
+  MealDetailScreen(this.toggle,this.isfavorite);
 
   Widget buildSectionTitle(
       {required String text, required BuildContext context}) {
@@ -81,8 +84,10 @@ class MealDetailScreen extends StatelessWidget {
           ],
         ),
       ),
-      floatingActionButton: FloatingActionButton(child: Icon(Icons.delete),onPressed:() {
-        Navigator.of(context).pop(mealId);
+      floatingActionButton: FloatingActionButton(child: Icon(
+        isfavorite(mealId) ?
+        Icons.star: Icons.star_border),onPressed:() {
+        toggle(mealId);
       },),
     );
   }
