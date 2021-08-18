@@ -21,13 +21,19 @@ class MealItem extends StatelessWidget {
       required this.deleteitem});
   // const MealItem({ Key? key }) : super(key: key);
   void selectMeal(BuildContext ctx) {
-    Navigator.of(ctx).pushNamed(MealDetailScreen.routeName, arguments: id).then(
-          (value){ if(value!=null)
-          {
-            deleteitem();
-          };},
-          
-        );
+    Navigator.of(ctx)
+        .pushNamed(
+      MealDetailScreen.routeName,
+      arguments: id,
+    )
+        .then(
+      (value) {
+        if (value != null) {
+          deleteitem(value);
+        }
+        ;
+      },
+    );
   }
 
   String get complexitytext {

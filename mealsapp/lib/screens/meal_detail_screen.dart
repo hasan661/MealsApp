@@ -71,7 +71,7 @@ class MealDetailScreen extends StatelessWidget {
                         child: Text("# ${index + 1}"),
                       ),
                       title: Text(selectMeal.steps[index]),
-                    ),
+                    ), 
                     Divider()
                   ],
                 );
